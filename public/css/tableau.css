@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('img/wood.jpg');
+    background-image: url('../assets/img/wood.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -24,7 +24,7 @@ body {
     border: 5px solid #8c1d14;
     box-sizing: border-box;
     position: relative;
-    background-image: url('img/love.png');
+    background-image: url('../assets/img/love.png');
     background-size: cover; 
     background-position: center; 
 }

@@ -102,6 +102,7 @@ function showMenu() {
     const name = document.getElementById("createNameInput").value;
     const numPlayers = document.getElementById("numPlayers").value;
     const pin = document.getElementById("gamePin").value;
+    window.location = "tableau.html";
     socket.emit("createGame", { name, numPlayers, pin });
   }
   
