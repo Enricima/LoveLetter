@@ -8,7 +8,7 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  background: url("img/fond-acceuil.jpg") no-repeat center center fixed;
+  background: url("../assets/img/fond-acceuil.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
