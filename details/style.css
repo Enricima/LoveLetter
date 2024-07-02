@@ -1,0 +1,89 @@
+body {
+  min-height: calc(100vh - 100px);
+  margin: 0;
+  font-family: "Georgia", serif;
+  padding: 50px;
+  color: #fff;
+  background-color: #686565;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  margin: 10px;
+}
+img:hover {
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  background: linear-gradient(145deg, rgba(139, 0, 0, 1), rgb(169, 145, 11));
+  border: 5px solid #b8860b;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 60vw;
+  height: auto;
+  max-width: 600px;
+  z-index: 1;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  text-align: center;
+  transition: top 0.5s ease-out;
+  padding-bottom: 25px;
+}
+
+.popup.open {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #ffebcd;
+  text-shadow: 2px 2px #8b0000;
+}
+
+.popup p {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #ffebcd;
+}
+
+.popup ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; /* Permet le retour à la ligne */
+  justify-content: center; /* Centre les éléments sur la ligne */
+}
+
+.popup ul li {
+  margin: 10px; /* Espacement entre les boutons */
+}
+
+button {
+  font-size: 1.25rem;
+  padding: 10px 20px;
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #b8860b;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.popup ul li button:hover {
+  background: rgba(184, 134, 11, 0.8);
+  color: #fff;
+}

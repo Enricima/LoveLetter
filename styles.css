@@ -81,4 +81,60 @@ p,
 h3,
 label {
   color: white;
+  font-size: 20px;
+}
+
+.parchemin-container {
+  text-align: center;
+}
+
+.parchemin {
+  background: rgba(58, 58, 58, 0.5);
+  backdrop-filter: blur(4px);
+  border: 5px solid #d73b22;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.parchemin label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #d6c354;
+}
+
+.parchemin input,
+.parchemin select {
+  width: calc(100% - 40px);
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-size: 20px;
+}
+
+.parchemin button {
+  background-color: #a93131;
+  color: #fff; /* Couleur de texte assortie au fond */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 10px 25px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-size: 20px;
+}
+
+.parchemin button:hover {
+  background-color: #6b030f;
+  color: #fff;
+}
+
+.parchemin div {
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>popup</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <button class="display-popup" onclick="showPopup('Garde')">Utiliser la carte du Garde</button>
+    <button class="display-popup" onclick="showPopup('Pretre')">Utiliser la carte du Prêtre</button>
+    <button class="display-popup" onclick="showPopup('Baron')">Utiliser la carte du Baron</button>
+    <button class="display-popup" onclick="showPopup('Prince')">Utiliser la carte du Prince</button>
+    <button class="display-popup" onclick="showPopup('Roi')">Utiliser la carte du Roi</button>
+
+    <button class="display-popup" onclick="showEliminationPopup()">Élimination d'un joueur</button>
+    <button class="display-popup" onclick="showFinManchePopup()">Fin de la manche</button>
+    <button class="display-popup" onclick="showFinPartiePopup()">Fin de la partie</button>
+
+    <div class="popup" id="popup">
+        <h2 id="popup-title"></h2>
+        <p id="popup-message"></p>
+        <ul>
+            <li><button onclick="selectPlayer('Joueur 1', currentCardType)">Joueur 1</button></li>
+            <li><button onclick="selectPlayer('Joueur 2', currentCardType)">Joueur 2</button></li>
+            <li><button onclick="selectPlayer('Joueur 3', currentCardType)">Joueur 3</button></li>
+        </ul>
+        <button id="close-btn" style="display:none;" onclick="closePopup()">Fermer</button>
+    </div>
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

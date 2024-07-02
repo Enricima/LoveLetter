@@ -19,39 +19,43 @@
         </div>
     </div>
 
-    <div id="createGame" style="display: none;">
+    <div id="createGame" class="parchemin-container" style="display: none;">
         <h2>Créer une Partie</h2>
-        <label for="createNameInput">Votre nom :</label>
-        <input id="createNameInput" placeholder="Votre nom">
-        <label for="numPlayers">Nombre de joueurs :</label>
-        <select id="numPlayers">
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-        </select><br>
-        <label for="gamePin">Code PIN :</label>
-        <input id="gamePin" placeholder="Code PIN">
-        <div>
-            <button onclick="createGame()">Créer</button>
-            <button onclick="showMenu()">Retour</button>
+        <div class="parchemin">
+            <label for="createNameInput">Votre nom :</label>
+            <input id="createNameInput" placeholder="Votre nom">
+            <label for="numPlayers">Nombre de joueurs :</label>
+            <select id="numPlayers">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select><br>
+            <label for="gamePin">Code PIN :</label>
+            <input id="gamePin" placeholder="Code PIN">
+            <div>
+                <button onclick="createGame()">Créer</button>
+                <button onclick="showMenu()">Retour</button>
+            </div>
         </div>
     </div>
 
-    <div id="joinGame" style="display: none;">
+    <div id="joinGame" class="parchemin-container" style="display: none;">
         <h2>Rejoindre une Partie</h2>
-        <label for="joinNameInput">Votre nom :</label>
-        <input id="joinNameInput" placeholder="Votre nom">
-        <label for="joinPin">Code PIN :</label>
-        <input id="joinPin" placeholder="Code PIN">
-        <div>
-            <button onclick="joinGame()">Rejoindre</button>
-            <button onclick="showMenu()">Retour</button>
+        <div class="parchemin">
+            <label for="joinNameInput">Votre nom :</label>
+            <input id="joinNameInput" placeholder="Votre nom">
+            <label for="joinPin">Code PIN :</label>
+            <input id="joinPin" placeholder="Code PIN">
+            <div>
+                <button onclick="joinGame()">Rejoindre</button>
+                <button onclick="showMenu()">Retour</button>
+            </div>
         </div>
     </div>
 
-    <div id="rules" style="display: none;">
+    <div id="rules" class="parchemin" style="display: none;">
         <h2>Règles du jeu</h2>
         <p>Dans Love Letter, 2 à 6 soupirants s'affrontent pour que leur lettres soient remises à la Princesse du
             royaume, qui cherche le partenaire idéal en prévision du jour où elle montrera sur le trône</p>
@@ -59,18 +63,23 @@
         <ul>
             <li><strong>Garde (1)</strong>: Devinez la carte d'un autre joueur pour l'éliminer.</li>
             <li><strong>Prêtre (2)</strong>: Regardez la carte en main d'un autre joueur.</li>
-            <li><strong>Baron (3)</strong>: Comparez votre main avec celle d'un autre joueur. Le joueur avec la carte la
+            <li><strong>Baron (3)</strong>: Comparez votre main avec celle d'un autre joueur. Le joueur avec la
+                carte la
                 plus
                 basse est éliminé.</li>
-            <li><strong>Servante (4)</strong>: Vous êtes protégé des effets des cartes jusqu'à votre prochain tour.</li>
-            <li><strong>Prince (5)</strong>: Choisissez un joueur (vous pouvez vous choisir) pour défausser sa main et
+            <li><strong>Servante (4)</strong>: Vous êtes protégé des effets des cartes jusqu'à votre prochain tour.
+            </li>
+            <li><strong>Prince (5)</strong>: Choisissez un joueur (vous pouvez vous choisir) pour défausser sa main
+                et
                 piocher
                 une nouvelle carte.</li>
-            <li><strong>Chancelier (6)</strong>: Piochez 2 cartes du paquet et ajoutez-les à votre main. Choisissez-en
+            <li><strong>Chancelier (6)</strong>: Piochez 2 cartes du paquet et ajoutez-les à votre main.
+                Choisissez-en
                 une à
                 garder et mettez les deux autres au fond du paquet.</li>
             <li><strong>Roi (7)</strong>: Échangez votre main avec celle d'un autre joueur.</li>
-            <li><strong>Comtesse (8)</strong>: Si vous avez cette carte en main avec le Roi ou le Prince, vous devez la
+            <li><strong>Comtesse (8)</strong>: Si vous avez cette carte en main avec le Roi ou le Prince, vous devez
+                la
                 défausser.</li>
             <li><strong>Princesse (9)</strong>: Si vous défaussez cette carte, vous êtes éliminé.</li>
         </ul>
