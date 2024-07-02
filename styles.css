@@ -82,3 +82,130 @@ h3,
 label {
   color: white;
 }
+
+/**button medieval**/
+.medieval-button {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  border: 0;
+  margin-bottom: 4px;
+
+  --mb-ring-color-1: #ba8550;
+  --mb-ring-color-2: #724622;
+  --mb-ring-color-3: #ba8550;
+  --mb-edge-color-top: #9e4436;
+  --mb-edge-color-bottom: #3a1510;
+  --mb-edge-color-left: #6a2223;
+  --mb-edge-color-right: #5a231c;
+  --mb-edge-color-light-1: #ae2b20;
+  --mb-edge-color-light-2: #e1914d;
+  --mb-body-color-1: #9d281e;
+  --mb-body-color-2: #7f2323;
+  --mb-body-color-3: #782626;
+  --mb-body-color-4: #862829;
+  --mb-text-color: #ebb275;
+}
+
+.medieval-button:enabled {
+  cursor: pointer;
+}
+
+.medieval-button .mb-overlay {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  opacity: 0;
+  background: #ffffff;
+  pointer-events: none;
+}
+
+.medieval-button:enabled:hover .mb-overlay {
+  opacity: 0.08;
+}
+
+.medieval-button:enabled:active .mb-overlay {
+  background: #000000;
+  opacity: 0.15;
+}
+
+.medieval-button .mb-ring {
+  padding: 5px;
+  background: linear-gradient(
+    to bottom,
+    var(--mb-ring-color-1),
+    var(--mb-ring-color-1) 3px,
+    var(--mb-ring-color-2) 4px,
+    var(--mb-ring-color-3)
+  );
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 2px 2px;
+}
+
+.medieval-button .mb-edge {
+  border: 6px solid #000;
+  border-top-color: var(--mb-edge-color-top);
+  border-bottom-color: var(--mb-edge-color-bottom);
+  border-left-color: var(--mb-edge-color-left);
+  border-right-color: var(--mb-edge-color-right);
+  background: radial-gradient(
+    var(--mb-edge-color-light-1) 66%,
+    var(--mb-edge-color-light-2)
+  );
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 2px 2px;
+}
+
+.medieval-button .mb-body {
+  padding: 8px 8px;
+  min-width: 120px;
+  background: linear-gradient(
+    170deg,
+    var(--mb-body-color-1),
+    var(--mb-body-color-2) 6px,
+    var(--mb-body-color-3) 10px,
+    var(--mb-body-color-4) 50%,
+    var(--mb-body-color-3)
+  );
+}
+
+.medieval-button .mb-text {
+  font-size: 1.15rem;
+  color: var(--mb-text-color);
+  text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.87);
+}
+
+.medieval-button.mb-style-primary {
+  --mb-ring-color-1: #ba8550;
+  --mb-ring-color-2: #724622;
+  --mb-ring-color-3: #ba8550;
+  --mb-edge-color-top: #9e4436;
+  --mb-edge-color-bottom: #3a1510;
+  --mb-edge-color-left: #6a2223;
+  --mb-edge-color-right: #5a231c;
+  --mb-edge-color-light-1: #ae2b20;
+  --mb-edge-color-light-2: #e1914d;
+  --mb-body-color-1: #9d281e;
+  --mb-body-color-2: #7f2323;
+  --mb-body-color-3: #782626;
+  --mb-body-color-4: #862829;
+  --mb-text-color: #ebb275;
+}
+
+.medieval-button.mb-style-secondary {
+  --mb-edge-color-top: #b3bcc7;
+  --mb-edge-color-bottom: #5e656e;
+  --mb-edge-color-left: #848d99;
+  --mb-edge-color-right: #747c87;
+  --mb-edge-color-light-1: #848e99;
+  --mb-edge-color-light-2: #848d96;
+  --mb-body-color-1: #b0b5c2;
+  --mb-body-color-2: #999fad;
+  --mb-body-color-3: #989ca6;
+  --mb-body-color-4: #b4b8c2;
+  --mb-text-color: #e9eef5;
+}
