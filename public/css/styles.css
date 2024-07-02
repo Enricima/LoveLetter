@@ -41,37 +41,7 @@ button {
   font-size: 16px;
 }
 
-button {
-  background-color: #a00404;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 20px;
-}
-
-button:hover {
-  background-color: #6b030f;
-}
-
 .button_menu {
-  display: flex;
-  flex-direction: column;
-}
-
-.parchment-button {
-  background-color: #d8b48c;
-  padding: 10px 20px;
-  font-family: "Georgia", serif;
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.parchment-button:hover {
-  background-color: #d1a87a;
-}
-
-.join_button {
   display: flex;
   flex-direction: column;
 }
@@ -100,6 +70,18 @@ label {
   color: #fff;
   margin: 0 auto;
 }
+.parchemin-regle {
+  background: rgba(58, 58, 58, 0.5);
+  backdrop-filter: blur(4px);
+  border: 5px solid #d73b22;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 1300px;
+  padding: 5px 20px;
+  color: #fff;
+  margin: 200px auto;
+}
 
 .parchemin label {
   display: block;
@@ -122,8 +104,6 @@ label {
   color: #fff; /* Couleur de texte assortie au fond */
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin: 10px 25px;
-  padding: 10px 30px;
   border-radius: 5px;
   font-size: 1rem;
   font-size: 20px;

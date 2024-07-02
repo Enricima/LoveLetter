@@ -67,8 +67,30 @@
             <label for="gamePin">Code PIN :</label>
             <input id="gamePin" placeholder="Code PIN">
             <div>
-                <button onclick="createGame()">Créer</button>
-                <button onclick="showMenu()">Retour</button>
+                <div>
+                    <button onclick="createGame()" class="medieval-button mb-style-primary">
+                        <div class='mb-ring'>
+                            <div class="mb-edge">
+                                <div class="mb-body">
+                                    <span class="mb-text">Créer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-overlay"></div>
+                    </button>
+                </div>
+                <div>
+                    <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                        <div class='mb-ring'>
+                            <div class="mb-edge">
+                                <div class="mb-body">
+                                    <span class="mb-text">Retour</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-overlay"></div>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -81,41 +103,78 @@
             <label for="joinPin">Code PIN :</label>
             <input id="joinPin" placeholder="Code PIN">
             <div>
-                <button onclick="joinGame()">Rejoindre</button>
-                <button onclick="showMenu()">Retour</button>
+                <div>
+                    <button onclick="joinGame()" class="medieval-button mb-style-primary">
+                        <div class='mb-ring'>
+                            <div class="mb-edge">
+                                <div class="mb-body">
+                                    <span class="mb-text">Rejoindre</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-overlay"></div>
+                    </button>
+                </div>
+                <div>
+                    <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                        <div class='mb-ring'>
+                            <div class="mb-edge">
+                                <div class="mb-body">
+                                    <span class="mb-text">Retour</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-overlay"></div>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="rules" class="parchemin" style="display: none;">
-        <h2>Règles du jeu</h2>
-        <p>Dans Love Letter, 2 à 6 soupirants s'affrontent pour que leur lettres soient remises à la Princesse du
-            royaume, qui cherche le partenaire idéal en prévision du jour où elle montrera sur le trône</p>
-        <h3>Pouvoirs des cartes</h3>
-        <ul>
-            <li><strong>Garde (1)</strong>: Devinez la carte d'un autre joueur pour l'éliminer.</li>
-            <li><strong>Prêtre (2)</strong>: Regardez la carte en main d'un autre joueur.</li>
-            <li><strong>Baron (3)</strong>: Comparez votre main avec celle d'un autre joueur. Le joueur avec la
-                carte la
-                plus
-                basse est éliminé.</li>
-            <li><strong>Servante (4)</strong>: Vous êtes protégé des effets des cartes jusqu'à votre prochain tour.
-            </li>
-            <li><strong>Prince (5)</strong>: Choisissez un joueur (vous pouvez vous choisir) pour défausser sa main
-                et
-                piocher
-                une nouvelle carte.</li>
-            <li><strong>Chancelier (6)</strong>: Piochez 2 cartes du paquet et ajoutez-les à votre main.
-                Choisissez-en
-                une à
-                garder et mettez les deux autres au fond du paquet.</li>
-            <li><strong>Roi (7)</strong>: Échangez votre main avec celle d'un autre joueur.</li>
-            <li><strong>Comtesse (8)</strong>: Si vous avez cette carte en main avec le Roi ou le Prince, vous devez
-                la
-                défausser.</li>
-            <li><strong>Princesse (9)</strong>: Si vous défaussez cette carte, vous êtes éliminé.</li>
-        </ul>
-        <button onclick="showMenu()">Retour</button>
+    <div id="rules" style="display: none;">
+        <div class="parchemin-regle">
+            <h2>Règles du jeu</h2>
+            <p>Dans Love Letter, 2 à 6 soupirants s'affrontent pour que leur lettres soient remises à la Princesse du
+                royaume, qui cherche le partenaire idéal en prévision du jour où elle montrera sur le trône</p>
+            <h3>Pouvoirs des cartes</h3>
+            <ul>
+                <li><strong>Espionne (0)</strong>: Si à la fin de la manche, vous êtes le seul joueur en lice qui à joué
+                    ou défaussé une Espionne, vous gagnez 1 pion Faveur</li>
+                <li><strong>Garde (1)</strong>: Devinez la carte d'un autre joueur pour l'éliminer.</li>
+                <li><strong>Prêtre (2)</strong>: Regardez la carte en main d'un autre joueur.</li>
+                <li><strong>Baron (3)</strong>: Comparez votre main avec celle d'un autre joueur. Le joueur avec la
+                    carte la
+                    plus
+                    basse est éliminé.</li>
+                <li><strong>Servante (4)</strong>: Vous êtes protégé des effets des cartes jusqu'à votre prochain tour.
+                </li>
+                <li><strong>Prince (5)</strong>: Choisissez un joueur (vous pouvez vous choisir) pour défausser sa main
+                    et
+                    piocher
+                    une nouvelle carte.</li>
+                <li><strong>Chancelier (6)</strong>: Piochez 2 cartes du paquet et ajoutez-les à votre main.
+                    Choisissez-en
+                    une à
+                    garder et mettez les deux autres au fond du paquet.</li>
+                <li><strong>Roi (7)</strong>: Échangez votre main avec celle d'un autre joueur.</li>
+                <li><strong>Comtesse (8)</strong>: Si vous avez cette carte en main avec le Roi ou le Prince, vous devez
+                    la
+                    défausser.</li>
+                <li><strong>Princesse (9)</strong>: Si vous défaussez cette carte, vous êtes éliminé.</li>
+            </ul>
+            <div>
+                <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                    <div class='mb-ring'>
+                        <div class="mb-edge">
+                            <div class="mb-body">
+                                <span class="mb-text">Retour</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-overlay"></div>
+                </button>
+            </div>
+        </div>
     </div>
 
     <div id="game" style="display: none;">
