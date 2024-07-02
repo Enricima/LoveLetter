@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: url("img/fond-acceuil.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1 {
+  color: white;
+  font-family: "MedievalSharp", cursive;
+  font-size: 120px;
+}
+
+h2 {
+  color: white;
+  font-family: "MedievalSharp", cursive;
+  font-size: 100px;
+}
+
+#menu,
+#createGame,
+#joinGame,
+#game {
+  text-align: center;
+}
+
+#numPlayers,
+#nameInput,
+#gamePin,
+#joinPin,
+button {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #a00404;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: #6b030f;
+}
+
+.button_menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.parchment-button {
+  background-color: #f9e6c0;
+  border: 1px solid #d8b48c;
+  padding: 10px 20px;
+  font-family: "Georgia", serif;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.parchment-button:hover {
+  background-color: #f7d8a0;
+  border: 1px solid #cda76c;
+}
+
+.join_button {
+  display: flex;
+  flex-direction: column;
+}
+
+ul,
+p,
+h3 {
+  color: white;
+}
