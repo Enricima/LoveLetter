@@ -43,6 +43,11 @@ body {
   align-items: center;
 }
 
+.cards {
+  display: flex;
+  gap: 10px;
+}
+
 .player,
 .deck {
   display: flex;
@@ -67,13 +72,33 @@ body {
 
 .player-name {
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
-.player-card img,
+.player-cards {
+  position: relative;
+  display: inline-block;
+}
+
+.player-cards img,
 .deck img {
   width: 60px;
   height: 75px;
+}
+
+.overlapping-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 20px; /* Ajustez cette valeur pour définir combien de l'image précédente est visible */
+  transform: translateY(
+    10%
+  ); /* Ajustez cette valeur pour un chevauchement plus précis */
+}
+
+.player-cards img:first-child {
+  position: relative; /* Le premier enfant doit être positionné relativement pour être la base du chevauchement */
+  transform: none; /* Réinitialise la transformation pour le premier enfant */
+  margin-top: 0; /* Réinitialise le margin-top pour le premier enfant */
 }
 
 .center {
