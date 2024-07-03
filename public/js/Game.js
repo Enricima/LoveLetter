@@ -1,10 +1,12 @@
+import * as Cards from'./Cards.js';
+
 class Game {
 
     constructor(players){
         this.players = players;
         this.deck = this.createDeck();
         this.discardPile = [];
-        this.scoreToEnd = setScoreToEnd(this.players.length);
+        this.scoreToEnd = this.setScoreToEnd(this.players.length);
     }
 
     setScoreToEnd(numPlayers){
@@ -26,16 +28,16 @@ class Game {
 
     createDeck() {
         const deck = [
-            new Espionne(), new Espionne(),
-            new Garde(), new Garde(), new Garde(), new Garde(), new Garde(), new Garde(),
-            new Prêtre(), new Prêtre(),
-            new Baron(), new Baron(),
-            new Servante(), new Servante(),
-            new Prince(), new Prince(),
-            new Chancelier(), new Chancelier(),
-            new Roi(),
-            new Comtesse(),
-            new Princesse()
+            new Cards.Espionne(), new Cards.Espionne(),
+            new Cards.Garde(), new Cards.Garde(), new Cards.Garde(), new Cards.Garde(), new Cards.Garde(), new Cards.Garde(),
+            new Cards.Pretre(), new Cards.Pretre(),
+            new Cards.Baron(), new Cards.Baron(),
+            new Cards.Servante(), new Cards.Servante(),
+            new Cards.Prince(), new Cards.Prince(),
+            new Cards.Chancelier(), new Cards.Chancelier(),
+            new Cards.Roi(),
+            new Cards.Comtesse(),
+            new Cards.Princesse()
         ];
         return this.shuffle(deck);
     }
@@ -51,6 +53,8 @@ class Game {
     dealInitialCards() {
         this.players.forEach(player => {
           player.drawCard(this.deck.pop());
+          player.hand = player.drawed[0];
+          player.drawed = [];
         });
     }
 
@@ -91,3 +95,4 @@ class Game {
 
     }
 }
+export default Game;
