@@ -40,7 +40,6 @@ class Player {
     // Jouer une carte
     playCard(drawed, hand, game, targetPlayer, guessedCard){
         return new Promise((resolve, reject)=> {
-            console.log("2 - jeu du joueur lancé");
             card.play(game, this, targetPlayer, guessedCard);
             if(drawed){ // Si la carte jouée est la carte piochée
                 const card = this.drawed[0];

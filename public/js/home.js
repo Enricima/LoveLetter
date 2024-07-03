@@ -26,6 +26,7 @@ function showMenu() {
     const name = document.getElementById("createNameInput").value;
     const numPlayers = document.getElementById("numPlayers").value;
     localStorage.setItem('numPlayers', numPlayers);
+    localStorage.setItem('name', name);
     const pin = document.getElementById("gamePin").value;
     window.location = "tableau.html";
     socket.emit("createGame", { name, numPlayers, pin });
@@ -34,5 +35,6 @@ function showMenu() {
   function joinGame() {
     const name = document.getElementById("joinNameInput").value;
     const pin = document.getElementById("joinPin").value;
+    localStorage.setItem('name', name);
     socket.emit("joinGame", { name, pin });
   }

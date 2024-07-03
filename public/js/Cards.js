@@ -107,7 +107,7 @@ export class Servante extends Card {
 export class Baron extends Card {
 
   constructor(){
-    super(4, "Baron", "Choisissez un autre joueur et comparez discrètement vos mains. Celui dont la carte a la plus faible valeur quitte la manche.", "assets/img/cartes/baron.png");
+    super(3, "Baron", "Choisissez un autre joueur et comparez discrètement vos mains. Celui dont la carte a la plus faible valeur quitte la manche.", "assets/img/cartes/baron.png");
   }
 
   play(){
@@ -119,7 +119,7 @@ export class Baron extends Card {
 export class Pretre extends Card {
 
   constructor(){
-    super(4, "Prêtre", "Choisissez un autre joueur et regardez sa main.", "assets/img/cartes/pretre.png");
+    super(2, "Prêtre", "Choisissez un autre joueur et regardez sa main.", "assets/img/cartes/pretre.png");
   }
 
   play(){
@@ -131,7 +131,7 @@ export class Pretre extends Card {
 export class Garde extends Card {
 
   constructor(){
-    super(4, "Garde", "Choisissez un autre joueur et nommez un personnage autre que le Garde. Si le joueur choisi a cette carte en main, il quitte la manche.", "assets/img/cartes/garde.png");
+    super(1, "Garde", "Choisissez un autre joueur et nommez un personnage autre que le Garde. Si le joueur choisi a cette carte en main, il quitte la manche.", "assets/img/cartes/garde.png");
   }
 
   play(){
@@ -143,7 +143,7 @@ export class Garde extends Card {
 export class Espionne extends Card {
 
   constructor(){
-    super(4, "Espionne", "A la fin de la manche, si vous êtes le seul joueur encore en lice qui a joué ou défaussé une Espionne, vous gagnez un pion faveur", "assets/img/cartes/espionne.png");
+    super(0, "Espionne", "A la fin de la manche, si vous êtes le seul joueur encore en lice qui a joué ou défaussé une Espionne, vous gagnez un pion faveur", "assets/img/cartes/espionne.png");
   }
 
   play(){
