@@ -13,7 +13,7 @@
         <h1>Love Letter</h1>
         <div class="button_menu">
             <div>
-                <button onclick="showCreateGame()" class="medieval-button mb-style-primary">
+                <button id="create" class="medieval-button mb-style-primary">
                     <div class='mb-ring'>
                         <div class="mb-edge">
                             <div class="mb-body">
@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div>
-                <button onclick="showJoinGame()" class="medieval-button mb-style-primary">
+                <button id="showJoinGame" class="medieval-button mb-style-primary">
                     <div class='mb-ring'>
                         <div class="mb-edge">
                             <div class="mb-body">
@@ -37,7 +37,7 @@
                 </button>
             </div>
             <div>
-                <button onclick="showRules()" class="medieval-button mb-style-secondary">
+                <button id="showRules" class="medieval-button mb-style-secondary">
                     <div class='mb-ring'>
                         <div class="mb-edge">
                             <div class="mb-body">
@@ -68,11 +68,11 @@
             <input id="gamePin" placeholder="Code PIN">
             <div>
                 <div>
-                    <button onclick="createGame()" class="medieval-button mb-style-primary">
+                    <button id="showMenu" class="medieval-button mb-style-primary">
                         <div class='mb-ring'>
                             <div class="mb-edge">
                                 <div class="mb-body">
-                                    <span class="mb-text">Créer</span>
+                                    <span class="mb-text">Retour</span>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +80,11 @@
                     </button>
                 </div>
                 <div>
-                    <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                    <button id="buttonCreateGame" class="medieval-button mb-style-primary">
                         <div class='mb-ring'>
                             <div class="mb-edge">
                                 <div class="mb-body">
-                                    <span class="mb-text">Retour</span>
+                                    <span class="mb-text">Créer</span>
                                 </div>
                             </div>
                         </div>
@@ -104,11 +104,11 @@
             <input id="joinPin" placeholder="Code PIN">
             <div>
                 <div>
-                    <button onclick="joinGame()" class="medieval-button mb-style-primary">
+                    <button id="showMenu2" class="medieval-button mb-style-primary">
                         <div class='mb-ring'>
                             <div class="mb-edge">
                                 <div class="mb-body">
-                                    <span class="mb-text">Rejoindre</span>
+                                    <span class="mb-text">Retour</span>
                                 </div>
                             </div>
                         </div>
@@ -116,11 +116,11 @@
                     </button>
                 </div>
                 <div>
-                    <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                    <button id="joinGame2" class="medieval-button mb-style-primary">
                         <div class='mb-ring'>
                             <div class="mb-edge">
                                 <div class="mb-body">
-                                    <span class="mb-text">Retour</span>
+                                    <span class="mb-text">Rejoindre</span>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
             <p>Pour remporter une manche, vous devez détenir la carte dont la valeur est la plus élevée à la fin de
                 cette manche ou être le dernier joueur en lice.</p>
             <div>
-                <button onclick="showMenu()" class="medieval-button mb-style-primary">
+                <button id="showMenu3" class="medieval-button mb-style-primary">
                     <div class='mb-ring'>
                         <div class="mb-edge">
                             <div class="mb-body">
@@ -183,19 +183,27 @@
         </div>
     </div>
 
-    <div id="game" style="display: none;">
-        <h1>Love Letter</h1>
-        <div id="players">
-            <!-- Les joueurs seront affichés ici -->
+    <!-- <div id="gameBoard" class="game-board" style="display: none;">
+        <div class="div1">
+    </div>
+    <div class="div2">
+
+    </div>
+    <div class="center">
+        <div class="deck" id="discard-pile">
+            <img src="assets/img/cartes/back.png">
+            <div>DEFAUSSE</div>
         </div>
-        <div id="actions">
-            <!-- Les actions et boutons du jeu seront ici -->
-        </div>
-        <div id="message">
-            <!-- Messages de jeu -->
+        <div class="deck" id="draw-pile">
+            <img src="assets/img/cartes/back.png">
+            <div>PIOCHE</div>
         </div>
     </div>
-    <script src="js/home.js"></script>
+    </div> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/home.js" type="module"></script>
+    <!-- <script src="js/main.js" type="module"></script> -->
 </body>
 
 </html>
