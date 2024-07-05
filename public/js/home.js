@@ -48,13 +48,20 @@ function createGame() {
     numPlayers,
     pin,
   });
-
-  // Redirection vers tableau.html après avoir créé la partie
-  window.location = "tableau.html";
 }
 
 socket.on("error", (data) => {
   alert(data.message);
+});
+
+socket.on("gameCreated", (data) => {
+  alert("La partie va se lancer quand tous les joueurs auront rejoint.");
+});
+
+socket.on("playerJoined", (data) => {
+  if (data.allPlayersJoined) {
+    window.location = "tableau.html";
+  }
 });
 
 function joinGame() {

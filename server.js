@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
   console.log("Session ID envoyé : ", socket.handshake.query.sessionId);
   let sessionId = socket.handshake.query.sessionId;
   if (users[sessionId]) {
-    //si le user existait = on met à jour avec son nouveau soket id
+    //si le user existait = on met à jour avec son nouveau socket id
     users[sessionId].id = socket.id;
   } else {
     //sinon on le crée
@@ -63,11 +63,6 @@ io.on("connection", (socket) => {
     users[sessionId].socket = socket;
     //user rejoint la room SI la room a encore des places vides
     let max = 0;
-    // users.forEach((user) => {
-    //   if (user.pin == pin && user.owner != false) {
-    //     max = user.owner;
-    //   }
-    // });
     for (const userId in users) {
       if (users[userId].pin == pin && users[userId].owner != false) {
         max = users[userId].owner;
@@ -76,11 +71,24 @@ io.on("connection", (socket) => {
     console.log("Utilisateurs max : " + max);
     const currents = await (await io.in(pin).fetchSockets()).length;
     console.log("Utilisateurs déjà dans la room : " + currents, max < currents);
+    const placeRestante = max - currents;
     if (currents < max) {
       socket.join(pin);
       io.to(pin).emit("notif", `${name} a rejoint la partie`);
       console.log(name + " peut rejoindre la room");
       console.log("utilisateur dans la room :" + currents);
+
+      // Vérifier si tous les joueurs ont rejoint
+      if (currents + 1 == max) {
+        io.to(pin).emit("playerJoined", { allPlayersJoined: true });
+        console.log("tout les joueurs ont rejoins");
+      } else {
+        console.log(
+          "pas tout les joueurs ont rejoins, il manque " +
+            placeRestante +
+            "joueur(s)"
+        );
+      }
     } else {
       socket.emit(
         "notif",
@@ -92,19 +100,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("user disconnected:", socket.id);
-    // for (const [gamePin, game] of Object.entries(games)) {
-    //   const playerIndex = game.players.findIndex(
-    //     (player) => player.id === socket.id
-    //   );
-    //   if (playerIndex !== -1) {
-    //     game.players.splice(playerIndex, 1);
-    //     io.to(gamePin).emit("playerDisconnected", { players: game.players });
-    //     if (game.players.length === 0) {
-    //       delete games[gamePin];
-    //     }
-    //     break;
-    //   }
-    // }
   });
 });
 
