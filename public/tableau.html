@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de Cartes</title>
     <link rel="stylesheet" href="css/tableau.css">
 </head>
+
 <body>
     <div class="game-board">
         <div class="div1">
             <!--Players-->
         </div>
         <div class="me">
-            
+   
         </div>
         <div class="center">
             <div class="deck" id="discard-pile">
@@ -34,6 +36,8 @@
         <button id="close-btn" style="display:none;" onclick="closePopup()">Fermer</button>
     </div>
 
-    <script src="js/main.js" type="module"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
+
 </html>

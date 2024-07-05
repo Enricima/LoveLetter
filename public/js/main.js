@@ -1,21 +1,26 @@
 "use strict";
-import Game from './Game.js';
-import Player from './Player.js';
-import * as Cards from './Cards.js';
-/****** VARIABLES *******/
-const players = [
-    new Player(1, 'Joueur 1'),
-    new Player(2, 'Joueur 2'),
-    new Player(3, 'Joueur 3'),
-    new Player(4, 'Joueur 4'),
-    new Player(5, 'Joueur 5'),
-    new Player(6, 'Joueur 6'),
-];
+import Game from "./Game.js";
+import Player from "./Player.js";
+import * as Cards from "./Cards.js";
 
-const userName = localStorage.getItem('name');
+/****** SOCKET *******/
+import { connectIO } from "./socket.js";
+const socket = connectIO().socket;
+let user;
+console.log(socket);
+console.log(localStorage.getItem("socket_id"));
+socket.on("getUser", (userObj) => {
+  console.log(userObj);
+  user = userObj;
+});
+
+/****** VARIABLES *******/
+const numPlayers = localStorage.getItem("numPlayers") || 2; // Récupérer le nombre de joueurs depuis le localStorage, par défaut 2
+const userName = localStorage.getItem("playerName") || "Utilisateur"; // Récupérer le nom de l'utilisateur depuis le localStorage, par défaut "Utilisateur"
+const players = createPlayers(numPlayers, userName); // Créer dynamiquement les joueurs en fonction du nombre de joueurs
 const userPlayer = players.filter(player => player.name === userName)[0];
+
 // Affichage général + initialisation de la partie
-const numPlayers = localStorage.getItem('numPlayers');
 const game = new Game(players);
 
 
@@ -52,36 +57,6 @@ document.addEventListener('DOMContentLoaded', () =>{
             });
         });
     });
-
-
-
-    //Début de la partie
-    // while (game.areAtLeastTwoPlayersInGame() && game.deck.length > 0) {
-    //     for (const player of game.players) {
-    //         const cardToPlay = null;
-    //         if (!player.isEliminated && game.deck.length > 0) {
-    //             let nextAction = {drawed: false, hand: false, targetPlayer: null, guessedCard: null};
-                // document.querySelectorAll('.target').forEach(target => {
-                //     target.addEventListener('click', () => {
-                //         const targetName = target.dataset.targetName;
-                //         const targetPlayer = null;
-                //         for(const player of game.players){
-                //             if(player.name === targetName && player.isEliminated != true && player.isProtected != true){
-                //                 targetPlayer = player;
-                //             }
-                //         }
-                //         nextAction.targetPlayer = target
-                //     });
-                // });
-                // document.querySelectorAll('.guessedCard').forEach(guessedCard => {
-                //     guessedCard.addEventListener('click', () => {
-                //         nextAction.guessedCard = guessedCard.dataset.number
-                //     });
-                // });
-                //game.playTurn(nextAction.hand, nextAction.drawed, nextAction.player, nextAction.guessedCard);
-            //}
-        //}
-    //}
 });
 
 /****** FONCTIONS *******/
