@@ -305,7 +305,7 @@ function createButtonPlayers(card, drawed, hand){
     } else if(card.number === 6){
         if(drawed){
             userPlayer.played.push(userPlayer.drawed[0]);
-            userPlayer.drawed[0] = [];
+            userPlayer.drawed = [];
         } else if(hand){
             userPlayer.played.push(userPlayer.hand);
             userPlayer.hand = userPlayer.drawed[0];
@@ -313,6 +313,7 @@ function createButtonPlayers(card, drawed, hand){
         }
         userPlayer.drawCard(game.deck.pop());
         userPlayer.drawCard(game.deck.pop());
+        console.log(userPlayer.drawed);
         let cards = [userPlayer.hand, userPlayer.drawed[0], userPlayer.drawed[1]];
         message.textContent = 'Choisissez la carte que vous voulez garder : ';
         for (const cardU of cards) {
