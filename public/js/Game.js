@@ -59,9 +59,11 @@ class Game {
         });
     }
 
-    eliminatePlayer(player) {
+    eliminatePlayer(game, player) {
+        console.log(player);
+        console.log(game);
         if(player.hand){
-            player.discardCard();
+            player.discardCard(game);
         }
         player.isEliminated = true;
     }

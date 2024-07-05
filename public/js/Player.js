@@ -17,8 +17,12 @@ class Player {
     }
 
     // Défausser une carte
-    discardCard(){
+    discardCard(game){
         const card = this.hand;
+        console.log(this)
+        if(card.number === 9){
+            game.eliminatePlayer(game, this);
+        }
         this.hand = null;
         this.played.push(card);
     }
@@ -38,21 +42,11 @@ class Player {
     }
 
     // Jouer une carte
-    playCard(drawed, hand, game, targetPlayer, guessedCard){
+    playCard(card, drawed, hand, game, player, targetPlayer, guessedCard){
         return new Promise((resolve, reject)=> {
-            card.play(game, this, targetPlayer, guessedCard);
-            if(drawed){ // Si la carte jouée est la carte piochée
-                const card = this.drawed[0];
-                this.played.push(card);
-                this.drawed = [];
-            } else if(hand){ // Si la carte jouée est la carte de sa main
-                const card = this.hand;
-                this.played.push(card);
-                this.hand = this.drawed[0];
-                this.drawed = [];
-            }
+            card.play(drawed, hand, game, player, targetPlayer, guessedCard);
             resolve(true); //true => valeur récupérée lors du then ou await
-        })
+        });
         
     }
 }
