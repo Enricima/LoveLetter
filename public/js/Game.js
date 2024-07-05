@@ -51,6 +51,7 @@ class Game {
     }
 
     dealInitialCards() {
+        this.discardPile.push(this.deck.pop());
         this.players.forEach(player => {
           player.drawCard(this.deck.pop());
           player.hand = player.drawed[0];
@@ -58,9 +59,11 @@ class Game {
         });
     }
 
-    eliminatePlayer(player) {
+    eliminatePlayer(game, player) {
+        console.log(player);
+        console.log(game);
         if(player.hand){
-            player.discardCard();
+            player.discardCard(game);
         }
         player.isEliminated = true;
     }
@@ -82,7 +85,7 @@ class Game {
     }
 
     startTurn(player){
-        drawedCard = player.drawCard(this.deck.pop());
+        let  drawedCard = player.drawCard(this.deck.pop());
         return drawedCard;
     }
 

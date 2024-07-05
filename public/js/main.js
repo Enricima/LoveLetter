@@ -2,7 +2,7 @@
 import Game from "./Game.js";
 import Player from "./Player.js";
 import * as Cards from "./Cards.js";
-console.log("ok");
+
 /****** SOCKET *******/
 import { connectIO } from "./socket.js";
 const socket = connectIO().socket;
@@ -17,114 +17,120 @@ socket.on("getUser", (userObj) => {
 /****** VARIABLES *******/
 const numPlayers = localStorage.getItem("numPlayers") || 2; // Récupérer le nombre de joueurs depuis le localStorage, par défaut 2
 const userName = localStorage.getItem("playerName") || "Utilisateur"; // Récupérer le nom de l'utilisateur depuis le localStorage, par défaut "Utilisateur"
-
 const players = createPlayers(numPlayers, userName); // Créer dynamiquement les joueurs en fonction du nombre de joueurs
-const userPlayer = players[0]; // Le premier joueur est l'utilisateur
+const userPlayer = players.filter(player => player.name === userName)[0];
 
 // Affichage général + initialisation de la partie
 const game = new Game(players);
-game.startGame();
 
-updatePlayersCards();
-updateUserCards();
 
 /****** CODE PRINCIPAL *******/
-document.addEventListener("DOMContentLoaded", () => {
-  // Bouton pour piocher une carte
-  document.querySelector("#draw-from-deck").addEventListener("click", () => {
-    let drawedCard = game.startTurn(userPlayer);
-    console.log(drawedCard);
 
-    updateUserCards();
-  });
+document.addEventListener('DOMContentLoaded', () =>{
+    game.startGame();
+    console.log(userPlayer.hand);
+    updatePlayersCards(userName, players);
+    updateUserCards(userName, players);
+    // Bouton pour piocher une carte
+    document.querySelector('#draw-from-deck').addEventListener('click', () => {
+        userPlayer.isProtected = false;
+        let drawedCard = game.startTurn(userPlayer);
 
-  // Bouton pour jouer la carte en main
-  document.querySelector("#user-hand").addEventListener("click", () => {
-    nextAction.drawed = false;
-    nextAction.hand = true;
-    const typeCard = hand.dataset.typeCard;
-    const cardToPlay = createCard(typeCard);
-    userPlaysCard(cardToPlay);
-  });
+        updateUserCards();
 
-  // Bouton pour jouer la carte piochée
-  document.querySelectorAll("#user-drawed-card").forEach((drawedCard) => {
-    drawedCard.addEventListener("click", () => {
-      nextAction.drawed = true;
-      nextAction.hand = false;
-      const typeCard = drawedCard.dataset.typeCard;
-      const cardToPlay = createCard(typeCard);
-      userPlaysCard(cardToPlay);
+        // Bouton pour jouer la carte en main
+        const hand = document.querySelector('#user-hand');
+        hand.addEventListener('click', () => {
+            const typeCard = hand.dataset.typecard;
+            const cardToPlay = createCard(typeCard);
+            userPlaysCard(cardToPlay, true, false);
+        });
+
+        // Bouton pour jouer la carte piochée
+        document.querySelectorAll('#user-drawed-card').forEach(drawedCard => {
+            drawedCard.querySelector("img").addEventListener('click', (e) => {
+                const typeCard = e.currentTarget.dataset.typecard;
+                console.log(typeCard);
+                const cardToPlay = createCard(typeCard);
+                console.log(cardToPlay);
+                userPlaysCard(cardToPlay, false, true);
+            });
+        });
     });
-  });
 });
 
 /****** FONCTIONS *******/
 
-function createPlayers(numPlayers, userName) {
-  const playerList = [];
-  for (let i = 1; i <= numPlayers; i++) {
-    const name = i === 1 ? userName : `Joueur ${i}`;
-    playerList.push(new Player(i, name));
-  }
-  return playerList;
-}
 
-function createCard(typeCard) {
-  switch (typeCard) {
-    case 9:
-      return new Cards.Princesse();
-    case 8:
-      return new Cards.Comtesse();
-    case 7:
-      return new Cards.Roi();
-    case 6:
-      return new Cards.Chancelier();
-    case 5:
-      return new Cards.Prince();
-    case 4:
-      return new Cards.Servante();
-    case 3:
-      return new Cards.Baron();
-    case 2:
-      return new Cards.Pretre();
-    case 1:
-      return new Cards.Garde();
-    case 0:
-      return new Cards.Espionne();
-    default:
-      break;
-  }
-}
-
-function userPlaysCard(card) {
-  const typeCard = card.number; // Récupérer le type de carte
-  if (typeCard === 1 || typeCard === 2 || typeCard === 3 || typeCard === 7) {
-    //Choix du joueur cible
-    if (typeCard === 1) {
-      //Choix de la carte à deviner
+function createCard(typeCard){
+    let cardToReturn = null;
+    switch (typeCard) {
+        case '9':
+            cardToReturn = new Cards.Princesse();
+            break;
+        case '8':
+            cardToReturn = new Cards.Comtesse();
+            break;
+        case '7':
+            cardToReturn = new Cards.Roi();
+            break;
+        case '6':
+            cardToReturn = new Cards.Chancelier();
+            break;
+        case '5':
+            cardToReturn = new Cards.Prince();
+            break;
+        case '4':
+            cardToReturn = new Cards.Servante();
+            break;
+        case '3':
+            cardToReturn = new Cards.Baron();
+            break;
+        case '2':
+            cardToReturn = new Cards.Pretre();
+            break;
+        case '1':
+            cardToReturn = new Cards.Garde();
+            break;
+        case '0':
+            cardToReturn = new Cards.Espionne();
+            break;
+        default:
+            break;
     }
-  } else if (typeCard === 5) {
-    //Choix du joueur cible y compris soi-même
-  } else {
-  }
+    return cardToReturn;
 }
 
-function updateUserCards() {
-  // Joueur utilisateur
-  const divUser = document.querySelector(".div2");
-  let playedImagesHTML = "";
+async function userPlaysCard(card, hand, drawed){
+    const typeCard = card.number;
+    if(typeCard === 1 || typeCard === 2 || typeCard === 3 || typeCard ===7 || typeCard === 5 || typeCard === 6){
+        //Choix du joueur cible
+        let returnedValues = showPopup(card, drawed, hand);
+    } else {
+        await userPlayer.playCard(card, drawed, hand, game, userPlayer, null, null);
+        updatePlayersCards();
+        updateUserCards();
+    }
+    
 
-  userPlayer.played.forEach((card) => {
-    playedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${userPlayer.hand.number}"/>`;
-  });
-  let drawedImagesHTML = "";
-  console.log(userPlayer.drawed);
-  userPlayer.drawed.forEach((card) => {
-    drawedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${userPlayer.hand.number}"/>`;
-  });
+}
 
-  divUser.innerHTML = `
+function updateUserCards(){
+    // Joueur utilisateur
+    const divUser = document.querySelector('.me');
+    let playedImagesHTML = '';
+    
+    userPlayer.played.forEach(card => {
+        playedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typecard="${card.number}"/>`;
+    });
+    let drawedImagesHTML = '';
+    userPlayer.drawed.forEach(card => {
+        console.log(card.number);
+        drawedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typecard="${card.number}"/>`;
+    });
+
+    if(!userPlayer.isEliminated){
+        divUser.innerHTML = `
         <div class="player" id="player${userPlayer.id}">
             <h4 class="player-name">${userPlayer.name}</h4>
             <div class="cards">
@@ -141,26 +147,43 @@ function updateUserCards() {
                     ${drawedImagesHTML}
                 </div>
             </div>
+            
         </div>
-    `;
+        `;
+    }else{
+        divUser.innerHTML = `
+        <div class="player" id="player${userPlayer.id}">
+            <h4 class="player-name">${userPlayer.name} (Eliminé)</h4>
+            <div class="cards">
+                <div class="player-cards">
+                    Banc
+                    ${playedImagesHTML}
+                </div>
+            </div>
+            
+        </div>
+        `;
+    }
+        
+        
 }
 
-function updatePlayersCards() {
-  // Joueurs adverses
-  const divPlayers = document.querySelector(".div1");
-  players.forEach((player) => {
-    if (player.name !== userPlayer.name) {
-      // Ignorer l'utilisateur lui-même
-      let playedImagesHTML = "";
-      player.played.forEach((card) => {
-        playedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${player.hand.number}"/>`;
-      });
-      let drawedImagesHTML = "";
-      player.drawed.forEach((card) => {
-        drawedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${player.hand.number}"/>`;
-      });
-
-      divPlayers.innerHTML += `
+function updatePlayersCards(){
+    // Joueurs adverses
+    const divPlayers = document.querySelector('.div1');
+    divPlayers. innerHTML = '';
+    players.forEach(player => {
+        let playedImagesHTML = '';
+        player.played.forEach(card => {
+            playedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${card.number}"/>`;
+        });
+        let drawedImagesHTML = '';
+        player.drawed.forEach(card => {
+            drawedImagesHTML += `<img class="overlapping-image" src="${card.image}" data-typeCard="${card.number}"/>`;
+        });
+        if(player.name != userName){
+            if(!player.isEliminated){
+                    divPlayers.innerHTML += `
                 <div class="player" id="player${player.id}">
                     <h4 class="player-name">${player.name}</h4>
                     <div class="cards">
@@ -177,8 +200,197 @@ function updatePlayersCards() {
                             ${drawedImagesHTML}
                         </div>
                     </div>
+                    
                 </div>
-            `;
+                `;
+            }else {
+                divPlayers.innerHTML += `
+                <div class="player" id="player${player.id}">
+                    <h4 class="player-name">${player.name} (Eliminé)</h4>
+                    <div class="cards">
+                        <div class="player-cards">
+                            Banc
+                            ${playedImagesHTML}
+                        </div>
+                    </div>
+                    
+                </div>
+                `;
+            }
+        }
+        
+    });
+}
+
+//Gestion des Popups
+const title = document.getElementById('popup-title');
+const message = document.getElementById('popup-message');
+const closeButton = document.getElementById('close-btn');
+const ulPlayers = document.querySelector('.popup-players');
+
+// Affiche un popup différent en fonction de la carte action choisi
+function showPopup(card, drawed, hand) {
+    switch (card.number) {
+      case 1 :
+        title.textContent = "Vous utilisez la carte du Garde";
+        message.textContent = "Choisissez de quel joueur vous désirez deviner la carte :";
+        closeButton.style.display = 'none';
+        break;
+      case 2 :
+        title.textContent = "Vous utilisez la carte du Prêtre";
+        message.textContent = "Choisissez de quel joueur vous désirez voir une carte :";
+        closeButton.style.display = 'none';
+        break;
+      case 3 :
+        title.textContent = "Vous utilisez la carte du Baron";
+        message.textContent = "Choisissez avec quel joueur vous désirez être en duel :";
+        closeButton.style.display = 'none';
+        break;
+      case 5 :
+        title.textContent = "Vous utilisez la carte du Prince";
+        message.textContent = "Choisissez de quel joueur vous désirez défausser une carte :";
+        closeButton.style.display = 'none';
+        break;
+      case 6 :
+        title.textContent = "Vous utilisez la carte du Chancelier";
+        message.textContent = "Vous piochez 2 cartes, choisissez la carte que vous voulez conserver :";
+        closeButton.style.display = 'none';
+        break
+      case 7 :
+        title.textContent = "Vous utilisez la carte du Roi";
+        message.textContent = "Choisissez avec quel joueur vous désirez échanger une carte :";
+        closeButton.style.display = 'none';
+        break;
     }
-  });
+
+    document.getElementById('popup').classList.add('open');
+    createButtonPlayers(card, drawed, hand);
+    
+}
+
+function createButtonPlayers(card, drawed, hand){
+    ulPlayers.innerHTML = '';
+    let returnValues = {targetPlayer: null, guessedCard: null};
+    if(card.number === 5){
+        game.players.forEach(player => {
+            if(!player.isProtected && !player.isEliminated){
+                ulPlayers.innerHTML += `<li data-playerName="${player.name}"><button>${player.name}</button></li>`;
+            }
+        });
+    } else if(card.number === 6){
+        if(drawed){
+            userPlayer.played.push(userPlayer.drawed[0]);
+            userPlayer.drawed[0] = [];
+        } else if(hand){
+            userPlayer.played.push(userPlayer.hand);
+            userPlayer.hand = userPlayer.drawed[0];
+            userPlayer.drawed = [];
+        }
+        userPlayer.drawCard(game.deck.pop());
+        userPlayer.drawCard(game.deck.pop());
+        let cards = [userPlayer.hand, userPlayer.drawed[0], userPlayer.drawed[1]];
+        message.textContent = 'Choisissez la carte que vous voulez garder : ';
+        for (const cardU of cards) {
+            ulPlayers.innerHTML += `
+            <li data-guessedcard="${cardU.name}"><button>${cardU.name}</button></li>
+            `;
+        }
+        const lisCards = document.querySelectorAll('.popup-players li');
+        lisCards.forEach(li => {
+            li.addEventListener('click', async () => {
+                let newCard = li.dataset.guessedcard;
+                console.log(newCard);
+                let cardsUnderDeck = [];
+                switch (newCard) {
+                    case userPlayer.hand.name:
+                        console.log("Switch hand");
+                        cardsUnderDeck.push(userPlayer.drawed[0]);
+                        cardsUnderDeck.push(userPlayer.drawed[1]);
+                        userPlayer.drawed = [];
+                        break;
+                    case userPlayer.drawed[0].name:
+                        console.log("Switch drawed 0");
+                        cardsUnderDeck.push(userPlayer.hand);
+                        cardsUnderDeck.push(userPlayer.drawed[1]);
+                        userPlayer.hand = userPlayer.drawed[0];
+                        userPlayer.drawed = [];
+                        break;
+                    case userPlayer.drawed[1].name:
+                        console.log("Switch drawed 1");
+                        cardsUnderDeck.push(userPlayer.hand);
+                        cardsUnderDeck.push(userPlayer.drawed[0]);
+                        userPlayer.hand = userPlayer.drawed[1];
+                        userPlayer.drawed = [];
+                        break;
+                }
+                console.log(game.deck);
+                for (const cardU of cardsUnderDeck) {
+                    game.deck.unshift(cardU);
+                }
+                console.log(game.deck);
+                closePopup();
+                userPlayer.playCard(card, drawed, hand, game, userPlayer, getPlayer(returnValues.targetPlayer), returnValues.guessedCard);
+                updatePlayersCards();
+                updateUserCards();
+            });
+        });
+    } else {
+        game.players.forEach(player => {
+            if(player.name != userName && !player.isProtected && !player.isEliminated){
+                ulPlayers.innerHTML += `<li data-playername="${player.name}"><button>${player.name}</button></li>`;
+            }
+        });
+    }
+    const lisPlayers = document.querySelectorAll('.popup-players li');
+    lisPlayers.forEach(li => {
+        li.addEventListener('click', async () => {
+            let playerName = li.dataset.playername;
+            returnValues.targetPlayer = playerName;
+            if(card.number === 1){
+                message.textContent = 'Choisissez la carte que vous pensez que : ' + playerName + ' a en main';
+                ulPlayers.innerHTML = `
+                    <li data-guessedcard="Espionne"><button>Espionne</button></li>
+                    <li data-guessedcard="Pretre"><button>Prêtre</button></li>
+                    <li data-guessedcard="Baron"><button>Baron</button></li>
+                    <li data-guessedcard="Servante"><button>Servante</button></li>
+                    <li data-guessedcard="Prince"><button>Prince</button></li>
+                    <li data-guessedcard="Chancelier"><button>Chancelier</button></li>
+                    <li data-guessedcard="Roi"><button>Roi</button></li>
+                    <li data-guessedcard="Comtesse"><button>Comtesse</button></li>
+                    <li data-guessedcard="Princesse"><button>Princesse</button></li>
+                    `;
+                const lisCards = document.querySelectorAll('.popup-players li');
+                lisCards.forEach(li => {
+                    li.addEventListener('click', async () => {
+                        returnValues.guessedCard = li.dataset.guessedcard;
+                        returnValues.targetPlayer = playerName;
+                        console.log(returnValues);
+                        
+                        closePopup();
+                        userPlayer.playCard(card, drawed, hand, game, userPlayer, getPlayer(returnValues.targetPlayer), returnValues.guessedCard);
+                        updatePlayersCards();
+                        updateUserCards();
+                    });
+                });
+            } else if(card.number === 6){
+                
+            }else {
+                closePopup();
+                let ok = await userPlayer.playCard(card, drawed, hand, game, userPlayer, getPlayer(returnValues.targetPlayer), null);
+                console.log(ok);
+                updatePlayersCards();
+                updateUserCards();
+            }
+        });
+    });
+}
+
+
+function closePopup() {
+    document.getElementById('popup').classList.remove('open');
+    document.querySelector('.popup ul').style.display = '';
+}
+
+function getPlayer(playerName){
+    return players.filter(player => player.name === playerName)[0];
 }

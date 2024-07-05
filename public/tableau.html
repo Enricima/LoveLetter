@@ -13,8 +13,8 @@
         <div class="div1">
             <!--Players-->
         </div>
-        <div class="div2">
-
+        <div class="me">
+   
         </div>
         <div class="center">
             <div class="deck" id="discard-pile">
@@ -22,10 +22,18 @@
                 <div>DEFAUSSE</div>
             </div>
             <div class="deck" id="draw-pile">
-                <img src="assets/img/cartes/back.png">
+                <img id="draw-from-deck" src="assets/img/cartes/back.png">
                 <div>PIOCHE</div>
             </div>
         </div>
+    </div>
+    <div class="popup" id="popup">
+        <h2 id="popup-title"></h2>
+        <p id="popup-message"></p>
+        <ul class="popup-players">
+            <!--Players-->
+        </ul>
+        <button id="close-btn" style="display:none;" onclick="closePopup()">Fermer</button>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

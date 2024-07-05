@@ -60,6 +60,7 @@ socket.on("gameCreated", (data) => {
 
 socket.on("playerJoined", (data) => {
   if (data.allPlayersJoined) {
+
     window.location = "tableau.html";
   }
 });
@@ -95,3 +96,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#showRules").addEventListener("click", showRules);
   document.querySelector("#joinGame2").addEventListener("click", joinGame);
 });
+
